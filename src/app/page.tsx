@@ -20,7 +20,7 @@ const catConfig: Record<string, {
     pillText: 'text-purple-700',
     icon: <Package size={13} />,
     headerBg: 'from-purple-50/80 to-white/90',
-    activeText: 'text-[hsl(var(--primary))]',
+    activeText: 'text-[#8A32C6]',
   },
   static: {
     border: 'border-sky-200/60',
@@ -28,7 +28,7 @@ const catConfig: Record<string, {
     pillText: 'text-sky-700',
     icon: <Globe2 size={13} />,
     headerBg: 'from-sky-50/50 to-white/90',
-    activeText: 'text-[hsl(var(--primary))]',
+    activeText: 'text-[#8A32C6]',
   },
   dynamic: {
     border: 'border-amber-200/50',
@@ -36,7 +36,7 @@ const catConfig: Record<string, {
     pillText: 'text-amber-700',
     icon: <Zap size={13} />,
     headerBg: 'from-amber-50/50 to-white/90',
-    activeText: 'text-[hsl(var(--primary))]',
+    activeText: 'text-[#8A32C6]',
   },
   ecommerce: {
     border: 'border-emerald-200/50',
@@ -44,7 +44,7 @@ const catConfig: Record<string, {
     pillText: 'text-emerald-700',
     icon: <ShoppingCart size={13} />,
     headerBg: 'from-emerald-50/50 to-white/90',
-    activeText: 'text-[hsl(var(--primary))]',
+    activeText: 'text-[#8A32C6]',
   },
   erp: {
     border: 'border-rose-200/50',
@@ -52,7 +52,7 @@ const catConfig: Record<string, {
     pillText: 'text-rose-700',
     icon: <Building2 size={13} />,
     headerBg: 'from-rose-50/50 to-white/90',
-    activeText: 'text-[hsl(var(--primary))]',
+    activeText: 'text-[#8A32C6]',
   },
   mobile: {
     border: 'border-indigo-200/50',
@@ -60,7 +60,7 @@ const catConfig: Record<string, {
     pillText: 'text-indigo-700',
     icon: <Smartphone size={13} />,
     headerBg: 'from-indigo-50/50 to-white/90',
-    activeText: 'text-[hsl(var(--primary))]',
+    activeText: 'text-[#8A32C6]',
   },
 };
 
@@ -69,6 +69,16 @@ function ProjectCard({ project, index }: { project: (typeof projects)[0]; index:
   const cfg = catConfig[project.category] ?? catConfig.static;
   const isLive = project.url !== '#';
   const catLabel = categories.find(c => c.id === project.category)?.label ?? '';
+
+  const isWhiteLogo = project.logo.toLowerCase().includes('milemakers') ||
+                      project.logo.toLowerCase().includes('movex') ||
+                      project.logo.toLowerCase().includes('branday');
+
+  const isLargeLogo = project.logo.toLowerCase().includes('aquapool') ||
+                      project.logo.toLowerCase().includes('srflames') ||
+                      project.logo.toLowerCase().includes('movex') ||
+                      project.logo.toLowerCase().includes('danush') ||
+                      project.logo.toLowerCase().includes('milemakers');
 
   return (
     <article
@@ -79,26 +89,30 @@ function ProjectCard({ project, index }: { project: (typeof projects)[0]; index:
       className="project-card group relative bg-white rounded-2xl sm:rounded-[1.6rem] overflow-hidden flex flex-col border border-purple-100/50
                  shadow-[0_4px_20px_-6px_rgba(52,31,96,0.03)] cursor-pointer
                  hover:shadow-[0_20px_48px_-12px_rgba(52,31,96,0.12)] hover:bg-white
-                 hover:-translate-y-1 sm:hover:-translate-y-2 hover:border-[hsl(var(--primary))]/20 transition-all duration-500 ease-out
+                 hover:-translate-y-1 sm:hover:-translate-y-2 hover:border-[#8A32C6]/20 transition-all duration-500 ease-out
                  active:scale-[0.98]"
       style={{ animationDelay: `${index * 55}ms` }}
       onClick={() => isLive && window.open(project.url, '_blank', 'noopener,noreferrer')}
     >
       {/* Top accent bar — purple to gold */}
-      <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[hsl(var(--primary))] via-[#7c3aed] to-[rgba(244,206,69,0.9)] z-20" />
-
-      {/* Logo area — warm cream/yellow bg so all logos are visible */}
+      <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#8A32C6] via-[#7c3aed] to-[rgba(244,206,69,0.9)] z-20" />
+ 
+      {/* Logo area — warm cream/yellow bg so all cards are uniform and pretty */}
       <div className="relative flex items-center justify-center h-36 sm:h-44 p-6 sm:p-8 overflow-hidden border-b border-purple-100/30"
-        style={{ background: 'linear-gradient(135deg, rgba(244,206,69,0.13) 0%,rgba(111, 84, 190, 0.9)100% , rgba(244,206,69,0.08) 100%)' }}>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(141, 24, 209, 0.01)_0%,transparent_60%)] pointer-events-none" />
-        <div className="relative w-full h-full max-w-[130px] sm:max-w-[150px] max-h-[64px] sm:max-h-[72px] mx-auto z-10
-                        transition-all duration-500 group-hover:scale-[1.06] group-hover:drop-shadow-[0_4px_12px_rgba(52,31,96,0.06)]">
+        style={{ background: 'linear-gradient(135deg, rgba(244,206,69,0.18) 0%, #FFFDF9 60%, rgba(244,206,69,0.08) 100%)' }}>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(141,24,209,0.01)_0%,transparent_60%)] pointer-events-none" />
+        <div className={`relative w-full h-full mx-auto z-10 transition-all duration-500
+                        group-hover:scale-[1.06] group-hover:drop-shadow-[0_4px_12px_rgba(52,31,96,0.06)]
+                        ${isLargeLogo
+                          ? 'max-w-[145px] sm:max-w-[170px] max-h-[76px] sm:max-h-[84px]'
+                          : 'max-w-[130px] sm:max-w-[150px] max-h-[64px] sm:max-h-[72px]'
+                        }`}>
           <Image
             src={project.logo}
             alt={`${project.name} logo`}
             fill
-            className="object-contain"
-            sizes="(max-width: 640px) 130px, 160px"
+            className={`object-contain ${isWhiteLogo ? 'brightness-0 opacity-80' : ''}`}
+            sizes="(max-width: 640px) 150px, 180px"
           />
         </div>
 
@@ -111,7 +125,7 @@ function ProjectCard({ project, index }: { project: (typeof projects)[0]; index:
 
         {/* Name */}
         <h3 className="text-[15.5px] font-extrabold text-[#1c0e35] tracking-tight leading-tight
-                       group-hover:text-[hsl(var(--primary))] transition-colors duration-300">
+                       group-hover:text-[#8A32C6] transition-colors duration-300">
           {project.name}
         </h3>
 
@@ -127,7 +141,7 @@ function ProjectCard({ project, index }: { project: (typeof projects)[0]; index:
               <span className="text-xs font-bold text-purple-750/80 group-hover:text-purple-700 transition-colors">
 
               </span>
-              <div className="w-8 h-8 rounded-full bg-purple-50 group-hover:bg-[hsl(var(--primary))] text-[hsl(var(--primary))] group-hover:text-white flex items-center justify-center transition-all duration-300 shadow-sm">
+              <div className="w-8 h-8 rounded-full bg-[rgba(244,206,69,1)] text-[#1c0e35] group-hover:bg-[#8A32C6] group-hover:text-white flex items-center justify-center transition-all duration-300 shadow-sm font-bold">
                 →
               </div>
             </>
@@ -146,7 +160,7 @@ function ProjectCard({ project, index }: { project: (typeof projects)[0]; index:
 function StatCard({ icon, value, label }: { icon: React.ReactNode; value: string; label: string }) {
   return (
     <div className="flex items-center gap-3 px-5 py-3 bg-white/50 backdrop-blur rounded-2xl border border-purple-100/50 hover:bg-white/80 transition-colors duration-300">
-      <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[hsl(var(--primary))] to-[#7c3aed] border border-purple-200/30 flex items-center justify-center text-white flex-shrink-0 shadow-sm">
+      <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#8A32C6] to-[#7c3aed] border border-purple-200/30 flex items-center justify-center text-white flex-shrink-0 shadow-sm">
         {icon}
       </div>
       <div>
@@ -180,10 +194,10 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#FFFDF9] text-[#1c0e35] selection:bg-purple-150 selection:text-[hsl(var(--primary))] pb-24 relative overflow-x-hidden pt-[56px] md:pt-[36px]">
+    <div className="min-h-screen bg-[#FFFDF9] text-[#1c0e35] selection:bg-purple-150 selection:text-[#8A32C6] pb-24 relative overflow-x-hidden pt-[56px] md:pt-[36px]">
 
       {/* ═══ TOP NAVBAR BAR (FIXED) ═══ */}
-      <div className="fixed top-0 left-0 right-0 w-full bg-[hsl(var(--primary))] text-white text-[11px] font-medium z-50 shadow-md border-b-2 border-[rgba(244,206,69,0.5)]">
+      <div className="fixed top-0 left-0 right-0 w-full bg-[#8A32C6] text-white text-[11px] font-medium z-50 shadow-md border-b-2 border-[rgba(244,206,69,0.5)]">
         {/* Mobile: stacked centered | Desktop: single inline row */}
         <div className="flex flex-col items-center gap-1 py-2.5 px-4
                         md:flex-row md:justify-center md:gap-x-5 md:gap-y-0">
@@ -248,7 +262,7 @@ export default function Home() {
             ].map(({ val, label, suffix }, i, arr) => (
               <React.Fragment key={label}>
                 <div className="flex flex-col items-center">
-                  <span className="text-[12px] sm:text-xl font-black text-[hsl(var(--primary))] leading-none flex items-center gap-0.5">
+                  <span className="text-[12px] sm:text-xl font-black text-[#8A32C6] leading-none flex items-center gap-0.5">
                     {val}
                     {suffix && <span style={{ color: 'rgba(244,206,69,1)', textShadow: '0 0 8px rgba(244,206,69,0.6)' }}>★</span>}
                     {!suffix && '+'}
@@ -269,7 +283,7 @@ export default function Home() {
             <h1 className="font-black tracking-tight leading-tight text-[20px] sm:text-[36px] md:text-[48px]">
               <span style={{ color: '#1c0e35' }}>Our</span>{' '}
               <span className="relative inline-block">
-                <span className="relative z-10 bg-gradient-to-r from-[hsl(var(--primary))] to-[#7c3aed] bg-clip-text text-transparent">
+                <span className="relative z-10 bg-gradient-to-r from-[#8A32C6] to-[#7c3aed] bg-clip-text text-transparent">
                   Works
                 </span>
                 <svg className="absolute -bottom-1 left-0 w-full" height="5" viewBox="0 0 200 5" preserveAspectRatio="none" aria-hidden="true">
@@ -300,7 +314,7 @@ export default function Home() {
                     whitespace-nowrap cursor-pointer select-none transition-all duration-200
                     border-b-2 -mb-px
                     ${isActive
-                      ? 'border-[rgba(244,206,69,0.9)] text-[hsl(var(--primary))]'
+                      ? 'border-[rgba(244,206,69,0.9)] text-[#8A32C6]'
                       : 'border-transparent text-[#574d6d] hover:text-[#1c0e35] hover:border-purple-200'
                     }
                   `}
@@ -317,7 +331,7 @@ export default function Home() {
           {/* Row header */}
           <div className="flex items-center justify-between mb-7 px-1 border-b border-purple-100/30 pb-4">
             <div className="flex items-center gap-3">
-              <div className="w-1 h-6 rounded-full bg-gradient-to-b from-[rgba(244,206,69,0.9)] to-[hsl(var(--primary))]" />
+              <div className="w-1 h-6 rounded-full bg-gradient-to-b from-[rgba(244,206,69,0.9)] to-[#8A32C6]" />
               <span className="text-sm font-extrabold text-[#1c0e35] tracking-tight">
                 {categories.find(c => c.id === selectedCategory)?.label ?? 'All Projects'}
               </span>
@@ -353,7 +367,7 @@ export default function Home() {
         {/* ═══ 5. FOOTER ═══ */}
         <footer className="mt-4 pt-8 border-t-2 border-[rgba(244,206,69,0.25)] flex flex-col items-center sm:flex-row
                           sm:justify-between gap-3 text-xs text-[#7d6c96] font-medium text-center sm:text-left">
-          <p>© 2026 <span className="font-bold text-[hsl(var(--primary))]">CrevionAds</span>. All rights reserved.</p>
+          <p>© 2026 <span className="font-bold text-[#8A32C6]">CrevionAds</span>. All rights reserved.</p>
 
         </footer>
       </div>
@@ -362,7 +376,7 @@ export default function Home() {
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         className={`fixed bottom-5 right-5 sm:bottom-7 sm:right-7 z-50 w-11 h-11 sm:w-12 sm:h-12 rounded-full text-white
-                   bg-gradient-to-br from-[hsl(var(--primary))] to-[#7c3aed]
+                   bg-gradient-to-br from-[#8A32C6] to-[#7c3aed]
                    shadow-[0_8px_24px_rgba(138,50,198,0.25)]
                    ring-2 ring-[rgba(244,206,69,0.4)] hover:ring-[rgba(244,206,69,0.8)]
                    hover:shadow-[0_12px_32px_rgba(138,50,198,0.35)] hover:-translate-y-1

@@ -185,7 +185,7 @@ export const projects: Project[] = [
   },
   {
     id: 'e-aquapool',
-    name: 'Acapole (Aqua Pool)',
+    name: 'Aqua Pool',
     logo: '/clients/aquapool-removebg-preview.png',
     category: 'ecommerce',
     description: 'Premium e-commerce storefront for Acapole featuring curated product collections, smooth checkout, and customer reviews.',
