@@ -62,6 +62,14 @@ const catConfig: Record<string, {
     headerBg: 'from-indigo-50/50 to-white/90',
     activeText: 'text-[#8A32C6]',
   },
+  software: {
+    border: 'border-violet-200/50',
+    pill: 'bg-violet-50',
+    pillText: 'text-violet-700',
+    icon: <Briefcase size={13} />,
+    headerBg: 'from-violet-50/50 to-white/90',
+    activeText: 'text-[#8A32C6]',
+  },
 };
 
 /* ─── Project Card ────────────────────────────────────────────────── */
@@ -78,7 +86,8 @@ function ProjectCard({ project, index }: { project: (typeof projects)[0]; index:
                       project.logo.toLowerCase().includes('srflames') ||
                       project.logo.toLowerCase().includes('movex') ||
                       project.logo.toLowerCase().includes('danush') ||
-                      project.logo.toLowerCase().includes('milemakers');
+                      project.logo.toLowerCase().includes('milemakers') ||
+                      project.logo.toLowerCase().includes('atom');
 
   return (
     <article
@@ -182,16 +191,24 @@ export default function Home() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Only live projects (url !== '#') appear in filtered portfolio
+  const liveProjects = useMemo(() => projects.filter(p => p.url !== '#'), []);
+
   const filtered = useMemo(() =>
-    selectedCategory === 'all' ? projects : projects.filter(p => p.category === selectedCategory),
-    [selectedCategory]
+    selectedCategory === 'all'
+      ? liveProjects
+      : liveProjects.filter(p => p.category === selectedCategory),
+    [selectedCategory, liveProjects]
   );
 
+  // Coming soon: url === '#'
+  const comingSoon = useMemo(() => projects.filter(p => p.url === '#'), []);
+
   const counts = useMemo(() => {
-    const m: Record<string, number> = { all: projects.length };
-    projects.forEach(p => { m[p.category] = (m[p.category] ?? 0) + 1; });
+    const m: Record<string, number> = { all: liveProjects.length };
+    liveProjects.forEach(p => { m[p.category] = (m[p.category] ?? 0) + 1; });
     return m;
-  }, []);
+  }, [liveProjects]);
 
   return (
     <div className="min-h-screen bg-[#FFFDF9] text-[#1c0e35] selection:bg-purple-150 selection:text-[#8A32C6] pb-24 relative overflow-x-hidden pt-[56px] md:pt-[36px]">
@@ -256,18 +273,33 @@ export default function Home() {
           {/* Stats — right-aligned on both mobile and desktop */}
           <div className="flex items-center justify-end gap-3 sm:gap-6 flex-shrink-0">
             {[
-              { val: `${projects.length}+`, label: 'Projects' },
-              { val: '50+', label: 'Clients' },
+              { val: '100+', label: 'Websites', highlight: true },
+              { val: '80+', label: 'Clients' },
               { val: '5', label: 'Rating', suffix: true },
-            ].map(({ val, label, suffix }, i, arr) => (
+            ].map(({ val, label, suffix, highlight }, i, arr) => (
               <React.Fragment key={label}>
                 <div className="flex flex-col items-center">
-                  <span className="text-[12px] sm:text-xl font-black text-[#8A32C6] leading-none flex items-center gap-0.5">
+                  <span
+                    className={`leading-none flex items-center gap-0.5 font-black
+                      ${highlight
+                        ? 'text-[15px] sm:text-[26px]'
+                        : 'text-[13px] sm:text-[22px]'
+                      }`}
+                    style={highlight
+                      ? { color: 'rgba(244,206,69,1)', textShadow: '0 0 16px rgba(244,206,69,0.7), 0 0 32px rgba(244,206,69,0.3)' }
+                      : { color: '#8A32C6', textShadow: '0 0 20px rgba(138,50,198,0.18)' }
+                    }
+                  >
                     {val}
                     {suffix && <span style={{ color: 'rgba(244,206,69,1)', textShadow: '0 0 8px rgba(244,206,69,0.6)' }}>★</span>}
-                    {!suffix && '+'}
                   </span>
-                  <span className="text-[7px] sm:text-[10px] font-semibold text-[#7d6c96] uppercase tracking-widest mt-0.5">{label}</span>
+                  <span className={`font-semibold text-[#7d6c96] uppercase tracking-widest mt-0.5
+                    ${highlight ? 'text-[7.5px] sm:text-[11px]' : 'text-[7px] sm:text-[10px]'}`}>
+                    {label}
+                  </span>
+                  {highlight && (
+                    <div className="h-[2px] w-full mt-0.5 rounded-full bg-gradient-to-r from-transparent via-[rgba(244,206,69,0.8)] to-transparent" />
+                  )}
                 </div>
                 {i < arr.length - 1 && (
                   <div className="w-px h-4 sm:h-8 bg-purple-100" />
@@ -346,13 +378,13 @@ export default function Home() {
           </div>
 
           {filtered.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-24 gap-5 text-center">
+            <div className="flex flex-col items-center justify-center py-16 gap-5 text-center">
               <div className="w-20 h-20 rounded-full bg-purple-50 border border-purple-100 flex items-center justify-center">
                 <Building2 size={28} className="text-purple-300" />
               </div>
               <div>
-                <p className="text-[#1c0e35] font-bold text-base">No projects yet</p>
-                <p className="text-sm text-[#7d6c96] mt-1">Coming soon — we're always delivering new work!</p>
+                <p className="text-[#1c0e35] font-bold text-base">No live projects in this category yet</p>
+                <p className="text-sm text-[#7d6c96] mt-1">Check back soon — we're always delivering new work!</p>
               </div>
             </div>
           ) : (
@@ -363,6 +395,37 @@ export default function Home() {
             </div>
           )}
         </main>
+
+        {/* ═══ 5. COMING SOON SECTION ═══ */}
+        {comingSoon.length > 0 && (
+          <section aria-label="Coming soon projects" className="mt-4">
+            {/* Section header */}
+            <div className="flex items-center gap-3 mb-6 px-1 pb-4 border-b border-[rgba(244,206,69,0.3)]">
+              <div className="w-1 h-6 rounded-full bg-gradient-to-b from-[rgba(244,206,69,0.9)] to-[rgba(244,206,69,0.3)]" />
+              <span className="text-sm font-extrabold text-[#1c0e35] tracking-tight">Coming Soon</span>
+              <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest
+                             px-2 py-0.5 rounded-full bg-[rgba(244,206,69,0.15)] text-[#a07c00] border border-[rgba(244,206,69,0.4)]">
+                🚀 {comingSoon.length} upcoming
+              </span>
+            </div>
+
+            {/* Coming soon cards — same grid, dimmed appearance */}
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-5 lg:gap-6">
+              {comingSoon.map((project, i) => (
+                <div key={project.id} className="relative opacity-70 pointer-events-none select-none">
+                  <ProjectCard project={project} index={i} />
+                  {/* Coming soon overlay badge */}
+                  <div className="absolute inset-0 flex items-start justify-end p-3 z-30 pointer-events-none">
+                    <span className="text-[9px] font-extrabold uppercase tracking-widest
+                                   px-2 py-1 rounded-full bg-[rgba(244,206,69,0.9)] text-[#1c0e35] shadow-sm">
+                      Coming Soon
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* ═══ 5. FOOTER ═══ */}
         <footer className="mt-4 pt-8 border-t-2 border-[rgba(244,206,69,0.25)] flex flex-col items-center sm:flex-row

@@ -5,7 +5,8 @@ export type Category =
   | 'dynamic'
   | 'ecommerce'
   | 'erp'
-  | 'mobile';
+  | 'mobile'
+  | 'software';
 
 export interface Project {
   id: string;
@@ -25,6 +26,7 @@ export const categories: { id: Category; label: string; emoji: string }[] = [
   { id: 'ecommerce', label: 'E-Commerce', emoji: '🛍️' },
   { id: 'erp', label: 'ERP Solutions', emoji: '🏢' },
   { id: 'mobile', label: 'Mobile Applications', emoji: '📱' },
+  { id: 'software', label: 'Custom Software', emoji: '💻' },
 ];
 
 export const projects: Project[] = [
@@ -119,6 +121,24 @@ export const projects: Project[] = [
     category: 'static',
     description: 'Professional solar energy company website with product catalogues, ROI calculators, and inquiry forms.',
     url: 'https://www.sunbirdsolars.com',
+  },
+  {
+    id: 's-modern-biotech',
+    name: 'Modern Biotech',
+    logo: '/clients/modern-biotech.png',
+    category: 'static',
+    description: 'Clean and professional website for Modern Biotech — lab-grade product catalogues, research highlights, and inquiry management.',
+    url: 'https://www.modern-biotech.in',
+    featured: true,
+  },
+  {
+    id: 's-capture-survey',
+    name: 'Capture Survey',
+    logo: '/clients/capture-survey.png',
+    category: 'static',
+    description: 'Landscaping and land survey company site for Capture Survey — project portfolio, service areas, and client contact flow.',
+    url: 'https://www.capturesurvey.in',
+    featured: true,
   },
   {
     id: 's-noorleen',
@@ -231,6 +251,26 @@ export const projects: Project[] = [
     category: 'mobile',
     description: 'AI-powered fitness tracking mobile application with personalized workout plans, progress analytics, and social challenges.',
     url: 'www.movexfitness.com',
+    featured: true,
+  },
+
+  // ─── CUSTOM SOFTWARE ────────────────────────────────────────────
+  {
+    id: 'sw-sunbird-proposal',
+    name: 'Sunbird Proposal Tool',
+    logo: '/clients/sunbird-removebg-preview.png',
+    category: 'software',
+    description: 'Custom solar proposal generation tool for Sunbird Solars — automated quotes, system sizing, ROI breakdowns, and branded PDF export.',
+    url: 'https://proposal.sunbirdsolars.com',
+    featured: true,
+  },
+  {
+    id: 'sw-crevion-receipt',
+    name: 'CrevionAds Receipt',
+    logo: '/images/crevionads_logod.png',
+    category: 'software',
+    description: 'Internal billing and receipt management system for CrevionAds — generate, track, and share client invoices and payment receipts.',
+    url: 'https://crevionads-reciept.vercel.app',
     featured: true,
   },
 ];
