@@ -102,7 +102,7 @@ export const projects: Project[] = [
     id: 's-zendoksa',
     name: 'Zendo KSA',
     logo: '/clients/zendo-arabic-black-logo.png',
-    category: 'static',
+    category: 'ecommerce',
     description: 'Bilingual Arabic–English corporate site for Zendo KSA with RTL support and polished brand identity.',
     url: 'https://www.zendoksa.com',
   },
