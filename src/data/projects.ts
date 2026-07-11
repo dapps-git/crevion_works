@@ -125,7 +125,7 @@ export const projects: Project[] = [
   {
     id: 's-modern-biotech',
     name: 'Modern Biotech',
-    logo: '/clients/modern-biotech.png',
+    logo: '/clients/modern.png',
     category: 'static',
     description: 'Clean and professional website for Modern Biotech — lab-grade product catalogues, research highlights, and inquiry management.',
     url: 'https://www.modern-biotech.in',
@@ -134,7 +134,7 @@ export const projects: Project[] = [
   {
     id: 's-capture-survey',
     name: 'Capture Survey',
-    logo: '/clients/capture-survey.png',
+    logo: '/clients/capture.png',
     category: 'static',
     description: 'Professional website for Capture Survey, showcasing Dual-Frequency DGPS receivers and advanced digital surveying technology for mapping contours, layouts, and land contours.',
     url: 'https://www.capturesurvey.in',
