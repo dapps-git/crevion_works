@@ -125,6 +125,10 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        {/* Favicon override */}
+        <link rel="icon" type="image/png" href="/clients/logo.png" />
+        <link rel="shortcut icon" type="image/png" href="/clients/logo.png" />
+        <link rel="apple-touch-icon" href="/clients/logo.png" />
       </head>
       <body className="antialiased min-h-screen bg-[#FFFDF9] text-[#1c0e35]">
         {children}
