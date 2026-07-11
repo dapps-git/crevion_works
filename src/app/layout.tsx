@@ -71,8 +71,8 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
   icons: {
-    icon: "/clients/logo.png",
-    apple: "/clients/logo.png",
+    icon: "/clients/logo-icon.png",
+    apple: "/clients/logo-icon.png",
   },
 };
 
@@ -126,9 +126,9 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         {/* Favicon override */}
-        <link rel="icon" type="image/png" href="/clients/logo.png" />
-        <link rel="shortcut icon" type="image/png" href="/clients/logo.png" />
-        <link rel="apple-touch-icon" href="/clients/logo.png" />
+        <link rel="icon" type="image/png" href="/clients/logo-icon.png" />
+        <link rel="shortcut icon" type="image/png" href="/clients/logo-icon.png" />
+        <link rel="apple-touch-icon" href="/clients/logo-icon.png" />
       </head>
       <body className="antialiased min-h-screen bg-[#FFFDF9] text-[#1c0e35]">
         {children}

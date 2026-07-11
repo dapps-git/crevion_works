@@ -107,7 +107,9 @@ function ProjectCard({ project, index }: { project: (typeof projects)[0]; index:
   } else if (project.logo.toLowerCase().includes('logo-removebg')) {
     scaleClass = "scale-[0.75]";
   } else if (project.logo.toLowerCase().includes('branday')) {
-    scaleClass = "scale-[0.78]";
+    scaleClass = "scale-[0.62]";
+  } else if (project.logo.toLowerCase().includes('srflames')) {
+    scaleClass = "scale-[0.95] -translate-y-2";
   } else if (project.logo.toLowerCase().includes('atom')) {
     scaleClass = "scale-[0.78]";
   } else if (project.logo.toLowerCase().includes('sunbird')) {

@@ -136,7 +136,7 @@ export const projects: Project[] = [
     name: 'Capture Survey',
     logo: '/clients/capture-survey.png',
     category: 'static',
-    description: 'Landscaping and land survey company site for Capture Survey — project portfolio, service areas, and client contact flow.',
+    description: 'Professional website for Capture Survey, showcasing Dual-Frequency DGPS receivers and advanced digital surveying technology for mapping contours, layouts, and land contours.',
     url: 'https://www.capturesurvey.in',
     featured: true,
   },
