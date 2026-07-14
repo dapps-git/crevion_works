@@ -296,78 +296,66 @@ export default function Home() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-0 sm:pt-2 pb-10 flex flex-col gap-6 sm:gap-14">
 
-        {/* ═══ 1. LOGO TOP-LEFT + TITLE & STATS CENTERED ═══ */}
-        <div className="relative pt-4 pb-5 border-b border-purple-100/30">
+        {/* ═══ 1. LOGO TOP-LEFT + STATS CENTERED ═══ */}
+        <div className="relative pt-4 pb-5 border-b border-purple-100/30 flex flex-col items-center sm:block">
 
           {/* Logo — top-left corner */}
-          <div className="absolute top-3 left-0 w-48 sm:w-56 h-[52px] sm:h-[58px] flex-shrink-0">
+          <div className="relative w-48 h-[52px] mb-2 sm:absolute sm:top-3 sm:left-0 sm:mb-0 sm:w-56 sm:h-[58px] flex-shrink-0">
             <Image
               src="/images/crevionads_logod.png"
               alt="CrevionAds"
               fill
               priority
-              className="object-contain object-left"
-              sizes="(max-width: 640px) 144px, 224px"
+              className="object-contain object-center sm:object-left"
+              sizes="(max-width: 640px) 192px, 224px"
             />
           </div>
 
-          {/* Our Works heading + stats — centered */}
-          <div className="flex flex-col items-center gap-3 pt-14 sm:pt-4">
-          <h1 className="font-black tracking-tight leading-none text-[13px] sm:text-[26px] md:text-[30px]">
-            <span style={{ color: '#1c0e35' }}>Our</span>{' '}
-            <span className="relative inline-block">
-              <span className="relative z-10 bg-gradient-to-r from-[rgb(138_50_198_/_0.9)] to-[#7c3aed] bg-clip-text text-transparent">
-                Works
-              </span>
-              <svg className="absolute -bottom-1 left-0 w-full" height="4" viewBox="0 0 200 4" preserveAspectRatio="none" aria-hidden="true">
-                <path d="M0 3 Q50 0 100 3 Q150 6 200 3" stroke="rgba(244,206,69,0.9)" strokeWidth="2" fill="none" strokeLinecap="round" />
-              </svg>
-            </span>
-          </h1>
-
-          {/* Stats row — centered below title */}
-          <div className="flex items-center gap-4 sm:gap-8 justify-center flex-wrap mt-1">
-            {[
-              { val: '100+', label: 'Websites', highlight: true },
-              { val: '80+', label: 'Clients' },
-              { val: '5', label: 'Rating', suffix: true },
-            ].map(({ val, label, suffix, highlight }, i, arr) => (
-              <React.Fragment key={label}>
-                <div className="flex flex-col items-center">
-                  <span
-                    className={`leading-none flex items-center gap-0.5 font-black
-                      ${highlight
-                        ? 'text-[17px] sm:text-[28px]'
-                        : 'text-[13px] sm:text-[22px]'
-                      }`}
-                    style={highlight
-                      ? { color: 'rgba(244,206,69,1)', textShadow: '0 0 16px rgba(244,206,69,0.7), 0 0 32px rgba(244,206,69,0.3)' }
-                      : { color: 'rgb(138 50 198 / 0.9)', textShadow: '0 0 20px rgba(138,50,198,0.18)' }
-                    }
-                  >
-                    {val}
-                    {suffix && <span style={{ color: 'rgba(244,206,69,1)', textShadow: '0 0 8px rgba(244,206,69,0.6)' }}>★</span>}
-                  </span>
-                  <span className={`font-semibold text-[#7d6c96] uppercase tracking-widest mt-1.5
-                    ${highlight ? 'text-[7.5px] sm:text-[11px]' : 'text-[7px] sm:text-[10px]'}`}>
-                    {label}
-                  </span>
-                  {highlight && (
-                    <div className="h-[2px] w-full mt-1.5 rounded-full bg-gradient-to-r from-transparent via-[rgba(244,206,69,0.8)] to-transparent" />
+          {/* Stats heading — centered */}
+          <div className="flex flex-col items-center gap-3 pt-1 sm:pt-4 w-full">
+            {/* Stats row — centered */}
+            <div className="flex items-center gap-5 sm:gap-8 justify-center flex-wrap">
+              {[
+                { val: '100+', label: 'Websites', highlight: true },
+                { val: '80+', label: 'Clients' },
+                { val: '5', label: 'Rating', suffix: true },
+              ].map(({ val, label, suffix, highlight }, i, arr) => (
+                <React.Fragment key={label}>
+                  <div className="flex flex-col items-center">
+                    <span
+                      className={`leading-none flex items-center gap-0.5 font-black
+                        ${highlight
+                          ? 'text-[25px] sm:text-[34px]'
+                          : 'text-[20px] sm:text-[28px]'
+                        }`}
+                      style={highlight
+                        ? { color: 'rgba(244,206,69,1)', textShadow: '0 0 16px rgba(244,206,69,0.7), 0 0 32px rgba(244,206,69,0.3)' }
+                        : { color: 'rgb(138 50 198 / 0.9)', textShadow: '0 0 20px rgba(138,50,198,0.18)' }
+                      }
+                    >
+                      {val}
+                      {suffix && <span style={{ color: 'rgba(244,206,69,1)', textShadow: '0 0 8px rgba(244,206,69,0.6)' }}>★</span>}
+                    </span>
+                    <span className={`font-semibold text-[#7d6c96] uppercase tracking-widest mt-1
+                      ${highlight ? 'text-[9px] sm:text-[11px]' : 'text-[8.5px] sm:text-[10px]'}`}>
+                      {label}
+                    </span>
+                    {highlight && (
+                      <div className="h-[2px] w-full mt-1.5 rounded-full bg-gradient-to-r from-transparent via-[rgba(244,206,69,0.8)] to-transparent" />
+                    )}
+                  </div>
+                  {i < arr.length - 1 && (
+                    <div className="w-px h-5 sm:h-8 bg-purple-100" />
                   )}
-                </div>
-                {i < arr.length - 1 && (
-                  <div className="w-px h-5 sm:h-8 bg-purple-100" />
-                )}
-              </React.Fragment>
-            ))}
-          </div>
+                </React.Fragment>
+              ))}
+            </div>
           </div> {/* end centering wrapper */}
         </div> {/* end header */}
 
         {/* ═══ 3. INTERACTIVE FILTER CONTROLLER ═══ */}
         <section aria-label="Filter projects by category" className="px-1">
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 border-b border-purple-100 pb-3">
+          <div className="flex flex-wrap justify-center gap-1.5 sm:gap-3 border-b border-purple-100 pb-3">
             {categories.map(cat => {
               const isActive = selectedCategory === cat.id;
               return (
@@ -377,7 +365,7 @@ export default function Home() {
                   aria-pressed={isActive}
                   onClick={() => setSelectedCategory(cat.id)}
                   className={`
-                    px-3 sm:px-5 py-1.5 text-[11px] sm:text-sm font-bold
+                    px-2.5 sm:px-5 py-1 sm:py-1.5 text-[10px] sm:text-sm font-bold
                     whitespace-nowrap cursor-pointer select-none transition-all duration-300
                     rounded-full border
                     ${isActive
@@ -386,7 +374,15 @@ export default function Home() {
                     }
                   `}
                 >
-                  {cat.label}
+                  <span className="block sm:hidden">
+                    {cat.id === 'all' ? 'All' :
+                     cat.id === 'static' ? 'Static' :
+                     cat.id === 'dynamic' ? 'Dynamic' :
+                     cat.id === 'erp' ? 'ERP' :
+                     cat.id === 'mobile' ? 'Mobile' :
+                     cat.id === 'software' ? 'Software' : cat.label}
+                  </span>
+                  <span className="hidden sm:block">{cat.label}</span>
                 </button>
               );
             })}
